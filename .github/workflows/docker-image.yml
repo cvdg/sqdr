@@ -14,8 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
+    - name: Build and push the Docker image
       run:  |
-        docker login ghcr.io -u cvdg --password {{ GHCR_TOKEN }}
+        docker login -u cvdg -p {{ GHCR_TOKEN }} ghcr.io
         docker build . --file Dockerfile --tag sqdr:latest
         docker push ghcr.io/cvdg/sqdr:latest
