@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image
 
 on:
   push:
@@ -15,4 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag sqdr:latest
+      run:  |
+      docker login --user cvdg --password {{ GHCR_TOKEN }} ghcr.io
+      docker build . --file Dockerfile --tag sqdr:latest
+      docker push ghcr.io/cvdg/sqdr:latest
